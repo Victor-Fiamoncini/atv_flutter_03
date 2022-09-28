@@ -1,13 +1,16 @@
+import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/application/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 
 class ConvertCurrencyPage extends StatefulWidget {
   final UserRepository userRepository;
+  final CurrencyRepository currencyRepository;
 
   const ConvertCurrencyPage({
     Key? key,
     required this.userRepository,
+    required this.currencyRepository,
   }) : super(key: key);
 
   @override

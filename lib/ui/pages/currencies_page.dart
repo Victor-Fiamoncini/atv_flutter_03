@@ -1,7 +1,13 @@
+import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
 import 'package:flutter/material.dart';
 
 class CurrenciesPage extends StatefulWidget {
-  const CurrenciesPage({Key? key}) : super(key: key);
+  final CurrencyRepository currencyRepository;
+
+  const CurrenciesPage({
+    Key? key,
+    required this.currencyRepository,
+  }) : super(key: key);
 
   @override
   State<CurrenciesPage> createState() => _CurrenciesPageState();
