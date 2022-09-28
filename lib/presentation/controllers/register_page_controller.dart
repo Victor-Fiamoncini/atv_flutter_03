@@ -1,4 +1,5 @@
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
+import 'package:atv_flutter_03/application/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPageController {
@@ -13,7 +14,11 @@ class RegisterPageController {
   });
 
   Future<void> registerUser() async {
-    print('name ' + nameEditingController.text);
-    print('email ' + emailEditingController.text);
+    final user = UserEntity(
+      name: nameEditingController.text,
+      email: emailEditingController.text,
+    );
+
+    await userRepository.save(user);
   }
 }
