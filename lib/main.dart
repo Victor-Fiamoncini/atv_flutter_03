@@ -1,3 +1,4 @@
+import 'package:atv_flutter_03/application/repositories/memory_user_repository.dart';
 import 'package:atv_flutter_03/ui/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -8,14 +9,16 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRepository = MemoryUserRepository();
+
     return MaterialApp(
       title: 'Conversor de Moedas',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: const ColorScheme(
+        colorScheme: ColorScheme(
           brightness: Brightness.light,
-          primary: Colors.amber,
-          onPrimary: Colors.amber,
+          primary: Colors.amber.shade300,
+          onPrimary: Colors.amber.shade300,
           secondary: Colors.white,
           onSecondary: Colors.white,
           error: Colors.red,
@@ -25,8 +28,8 @@ class App extends StatelessWidget {
           surface: Colors.white,
           onSurface: Colors.white,
         ),
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.amber,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.amber.shade300,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
@@ -36,7 +39,7 @@ class App extends StatelessWidget {
               ),
             ),
             elevation: MaterialStateProperty.all(0),
-            backgroundColor: MaterialStateProperty.all(Colors.amber),
+            backgroundColor: MaterialStateProperty.all(Colors.amber.shade300),
             padding: MaterialStateProperty.all(
               const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -52,7 +55,7 @@ class App extends StatelessWidget {
             color: Colors.white,
           ),
           filled: true,
-          fillColor: Colors.amber,
+          fillColor: Colors.amber.shade300,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 16,
@@ -70,7 +73,7 @@ class App extends StatelessWidget {
           ),
         ),
       ),
-      home: const RegisterPage(),
+      home: RegisterPage(userRepository: userRepository),
     );
   }
 }
