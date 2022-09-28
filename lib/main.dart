@@ -29,7 +29,9 @@ class App extends StatelessWidget {
           onSurface: Colors.white,
         ),
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Colors.amber.shade300,
+          cursorColor: Colors.white,
+          selectionColor: Colors.amber.withOpacity(0.9),
+          selectionHandleColor: Colors.black,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(

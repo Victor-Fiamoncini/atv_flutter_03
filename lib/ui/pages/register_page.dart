@@ -1,5 +1,6 @@
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/presentation/controllers/register_page_controller.dart';
+import 'package:atv_flutter_03/ui/pages/convert_currency_page.dart';
 import 'package:atv_flutter_03/ui/styles.dart';
 import 'package:atv_flutter_03/validators/register_validator.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +36,16 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<void> onFormButtonPress(BuildContext context) async {
+  void onFormButtonPress(BuildContext context) {
     if (!_formKey.currentState!.validate()) return;
 
-    await registerPageController.registerUser();
+    registerPageController.registerUser();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ConvertCurrencyPage(),
+      ),
+    );
   }
 
   @override
@@ -65,6 +72,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 140,
                       ),
                       const SizedBox(height: 20),
+                      const Text(
+                        'Insira os dados do seu usuário abaixo:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 26),
                       TextFormField(
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
@@ -86,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ElevatedButton(
                         onPressed: () => onFormButtonPress(context),
                         child: Text(
-                          'Enviar',
+                          'Registrar',
                           style: defaultElevatedButtonTextStyle(theme),
                         ),
                       ),
