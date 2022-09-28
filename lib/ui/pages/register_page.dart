@@ -41,9 +41,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
     registerPageController.registerUser();
 
-    Navigator.of(context).push(
+    Navigator.push(
+      context,
       MaterialPageRoute(
-        builder: (context) => ConvertCurrencyPage(),
+        builder: (context) => ConvertCurrencyPage(
+          userRepository: widget.userRepository,
+        ),
       ),
     );
   }
