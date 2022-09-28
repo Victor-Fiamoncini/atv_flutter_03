@@ -1,15 +1,31 @@
+import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/application/repositories/memory_user_repository.dart';
 import 'package:atv_flutter_03/ui/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(const App());
+void main() {
+  final userRepository = MemoryUserRepository();
+
+  runApp(App(userRepository: userRepository));
+}
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  final UserRepository userRepository;
+
+  const App({
+    Key? key,
+    required this.userRepository,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userRepository = MemoryUserRepository();
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.amber.shade300,
+        systemNavigationBarColor: Colors.amber.shade300,
+      ),
+    );
 
     return MaterialApp(
       title: 'Conversor de Moedas',
