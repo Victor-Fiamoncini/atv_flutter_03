@@ -16,20 +16,12 @@ class ConvertCurrencyPageController {
     required this.currencyRepository,
   });
 
-  void onFromCurrencyChange(CurrencyEntity? currency) {
-    fromCurrency = currency;
-  }
-
-  void onToCurrencyChange(CurrencyEntity? currency) {
-    toCurrency = currency;
-  }
-
   Future<void> convertCurrency() async {
     if (fromCurrency is! CurrencyEntity || toCurrency is! CurrencyEntity) {
       throw Exception();
     }
 
-    final inputValue = toTextEditingController.text.replaceAll(',', '.');
+    final inputValue = fromTextEditingController.text.replaceAll(',', '.');
     final parsedInputValue = double.parse(inputValue);
 
     final convertionTypes = {
@@ -41,6 +33,6 @@ class ConvertCurrencyPageController {
 
     final convertedValue = convertionTypes[fromCurrency?.name]!();
 
-    fromTextEditingController.text = convertedValue.toStringAsFixed(4);
+    toTextEditingController.text = convertedValue.toStringAsFixed(4);
   }
 }

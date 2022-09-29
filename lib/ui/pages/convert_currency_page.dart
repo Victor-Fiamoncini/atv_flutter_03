@@ -1,7 +1,9 @@
 import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/application/entities/user_entity.dart';
+import 'package:atv_flutter_03/presentation/controllers/convert_currency_page_controller.dart';
 import 'package:atv_flutter_03/ui/pages/currencies_history_page.dart';
+import 'package:atv_flutter_03/ui/widgets/currency_box.dart';
 import 'package:flutter/material.dart';
 
 class ConvertCurrencyPage extends StatefulWidget {
@@ -20,6 +22,10 @@ class ConvertCurrencyPage extends StatefulWidget {
 
 class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
   late UserEntity user;
+  late ConvertCurrencyPageController convertCurrencyPageController;
+
+  final fromTextEditingController = TextEditingController();
+  final toTextEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +33,22 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
 
     widget.userRepository.currentUser.then((value) {
       setState(() => user = value);
+    });
+
+    convertCurrencyPageController = ConvertCurrencyPageController(
+      fromTextEditingController: fromTextEditingController,
+      toTextEditingController: toTextEditingController,
+      currencyRepository: widget.currencyRepository,
+    );
+  }
+
+  void _onConvertButtonPress(BuildContext context) {
+    convertCurrencyPageController.convertCurrency().catchError((_) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          'Houve um erro ao relizar a conversão, verifique os campos e tente novamente',
+        ),
+      ));
     });
   }
 
@@ -46,6 +68,7 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -69,6 +92,51 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
             onPressed: () => _onActionButtonPress(context),
           ),
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
+          height: mediaQuery.size.height,
+          child: Column(
+            children: [
+              CurrencyBox(
+                textEditingController: fromTextEditingController,
+                selectedCurrency: convertCurrencyPageController.fromCurrency,
+                hintText: 'De',
+                readOnly: false,
+                onChange: (currency) {
+                  setState(() {
+                    convertCurrencyPageController.fromCurrency = currency;
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
+              CurrencyBox(
+                textEditingController: toTextEditingController,
+                selectedCurrency: convertCurrencyPageController.toCurrency,
+                hintText: 'Para',
+                readOnly: true,
+                onChange: (currency) {
+                  setState(() {
+                    convertCurrencyPageController.toCurrency = currency;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => _onConvertButtonPress(context),
+                child: Text(
+                  'Converter',
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
