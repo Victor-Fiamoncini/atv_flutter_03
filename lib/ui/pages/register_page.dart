@@ -58,11 +58,12 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: mediaQuery.size.height,
           padding: const EdgeInsets.all(10),
           child: Align(
             alignment: Alignment.center,

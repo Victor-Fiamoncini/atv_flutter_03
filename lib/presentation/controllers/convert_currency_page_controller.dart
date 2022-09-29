@@ -26,7 +26,7 @@ class ConvertCurrencyPageController {
 
   Future<void> convertCurrency() async {
     if (fromCurrency is! CurrencyEntity || toCurrency is! CurrencyEntity) {
-      throw Exception('Houve um erro ao converter, tente novamente');
+      throw Exception();
     }
 
     final inputValue = toTextEditingController.text.replaceAll(',', '.');

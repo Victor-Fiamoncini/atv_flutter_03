@@ -100,6 +100,10 @@ class App extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: Colors.red,
+          actionTextColor: Colors.white,
+        ),
       ),
       home: RegisterPage(
         userRepository: userRepository,
