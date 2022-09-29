@@ -18,7 +18,7 @@ class HistoryCurrencyListItem extends StatelessWidget {
     final toValue = historyCurrency.toValue;
 
     return Card(
-      margin: const EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       elevation: 0,
       color: theme.colorScheme.primary,
       shape: RoundedRectangleBorder(

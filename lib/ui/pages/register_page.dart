@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Container(
           height: mediaQuery.size.height,
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
           child: Align(
             alignment: Alignment.center,
             child: Column(
