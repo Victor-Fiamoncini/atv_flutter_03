@@ -1,4 +1,4 @@
-import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:atv_flutter_03/application/entities/currency_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +8,12 @@ class ConvertCurrencyPageController {
 
   final TextEditingController fromTextEditingController;
   final TextEditingController toTextEditingController;
-  final CurrencyRepository currencyRepository;
+  final HistoryCurrencyRepository historyCurrencyRepository;
 
   ConvertCurrencyPageController({
     required this.fromTextEditingController,
     required this.toTextEditingController,
-    required this.currencyRepository,
+    required this.historyCurrencyRepository,
   });
 
   Future<void> convertCurrency() async {

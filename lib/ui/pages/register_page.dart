@@ -1,4 +1,4 @@
-import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/presentation/controllers/register_page_controller.dart';
 import 'package:atv_flutter_03/ui/pages/convert_currency_page.dart';
@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
   final UserRepository userRepository;
-  final CurrencyRepository currencyRepository;
+  final HistoryCurrencyRepository historyCurrencyRepository;
 
   const RegisterPage({
     Key? key,
     required this.userRepository,
-    required this.currencyRepository,
+    required this.historyCurrencyRepository,
   }) : super(key: key);
 
   @override
@@ -49,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
       MaterialPageRoute(
         builder: (context) => ConvertCurrencyPage(
           userRepository: widget.userRepository,
-          currencyRepository: widget.currencyRepository,
+          historyCurrencyRepository: widget.historyCurrencyRepository,
         ),
       ),
     );

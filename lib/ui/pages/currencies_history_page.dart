@@ -1,12 +1,12 @@
-import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:flutter/material.dart';
 
 class CurrenciesHistoryPage extends StatelessWidget {
-  final CurrencyRepository currencyRepository;
+  final HistoryCurrencyRepository historyCurrencyRepository;
 
   const CurrenciesHistoryPage({
     Key? key,
-    required this.currencyRepository,
+    required this.historyCurrencyRepository,
   }) : super(key: key);
 
   void _onBackButtonPress(BuildContext context) => Navigator.pop(context);

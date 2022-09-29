@@ -1,6 +1,6 @@
-import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
-import 'package:atv_flutter_03/application/repositories/memory_currency_repository.dart';
+import 'package:atv_flutter_03/application/repositories/memory_history_currency_repository.dart';
 import 'package:atv_flutter_03/application/repositories/memory_user_repository.dart';
 import 'package:atv_flutter_03/ui/pages/register_page.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +8,11 @@ import 'package:flutter/services.dart';
 
 void main() {
   final userRepository = MemoryUserRepository();
-  final currencyRepository = MemoryCurrencyRepository();
+  final historyCurrencyRepository = MemoryHistoryCurrencyRepository();
 
   final app = App(
     userRepository: userRepository,
-    currencyRepository: currencyRepository,
+    historyCurrencyRepository: historyCurrencyRepository,
   );
 
   runApp(app);
@@ -20,12 +20,12 @@ void main() {
 
 class App extends StatelessWidget {
   final UserRepository userRepository;
-  final CurrencyRepository currencyRepository;
+  final HistoryCurrencyRepository historyCurrencyRepository;
 
   const App({
     Key? key,
     required this.userRepository,
-    required this.currencyRepository,
+    required this.historyCurrencyRepository,
   }) : super(key: key);
 
   @override
@@ -107,7 +107,7 @@ class App extends StatelessWidget {
       ),
       home: RegisterPage(
         userRepository: userRepository,
-        currencyRepository: currencyRepository,
+        historyCurrencyRepository: historyCurrencyRepository,
       ),
     );
   }

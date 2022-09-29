@@ -1,5 +1,6 @@
-import 'package:atv_flutter_03/application/contracts/currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
+import 'package:atv_flutter_03/application/entities/history_currency_entity.dart';
 import 'package:atv_flutter_03/application/entities/user_entity.dart';
 import 'package:atv_flutter_03/presentation/controllers/convert_currency_page_controller.dart';
 import 'package:atv_flutter_03/ui/pages/currencies_history_page.dart';
@@ -8,12 +9,12 @@ import 'package:flutter/material.dart';
 
 class ConvertCurrencyPage extends StatefulWidget {
   final UserRepository userRepository;
-  final CurrencyRepository currencyRepository;
+  final HistoryCurrencyRepository historyCurrencyRepository;
 
   const ConvertCurrencyPage({
     Key? key,
     required this.userRepository,
-    required this.currencyRepository,
+    required this.historyCurrencyRepository,
   }) : super(key: key);
 
   @override
@@ -38,13 +39,30 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
     convertCurrencyPageController = ConvertCurrencyPageController(
       fromTextEditingController: fromTextEditingController,
       toTextEditingController: toTextEditingController,
-      currencyRepository: widget.currencyRepository,
+      historyCurrencyRepository: widget.historyCurrencyRepository,
     );
   }
 
   void _onConvertButtonPress(BuildContext context) {
-    convertCurrencyPageController.convertCurrency().catchError((_) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    convertCurrencyPageController.convertCurrency().then((_) {
+      scaffoldMessenger.showSnackBar(const SnackBar(
+        backgroundColor: Colors.green,
+        content: Text('Uma nova conversão foi adicionada ao histórico'),
+      ));
+
+      final historyCurrency = HistoryCurrencyEntity(
+        user: user,
+        fromConversionType: convertCurrencyPageController.fromCurrency!.name,
+        toConversionType: convertCurrencyPageController.toCurrency!.name,
+        fromValue: fromTextEditingController.text,
+        toValue: toTextEditingController.text,
+      );
+
+      widget.historyCurrencyRepository.save(historyCurrency);
+    }).catchError((_) {
+      scaffoldMessenger.showSnackBar(const SnackBar(
         content: Text(
           'Houve um erro ao relizar a conversão, verifique os campos e tente novamente',
         ),
@@ -59,7 +77,7 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
       context,
       MaterialPageRoute(
         builder: (context) => CurrenciesHistoryPage(
-          currencyRepository: widget.currencyRepository,
+          historyCurrencyRepository: widget.historyCurrencyRepository,
         ),
       ),
     );
