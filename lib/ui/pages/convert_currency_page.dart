@@ -1,6 +1,5 @@
 import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
-import 'package:atv_flutter_03/application/entities/history_currency_entity.dart';
 import 'package:atv_flutter_03/application/entities/user_entity.dart';
 import 'package:atv_flutter_03/presentation/controllers/convert_currency_page_controller.dart';
 import 'package:atv_flutter_03/ui/pages/currencies_history_page.dart';
@@ -46,28 +45,25 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
   void _onConvertButtonPress(BuildContext context) {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    convertCurrencyPageController.convertCurrency().then((_) {
+    void onConversionSuccess(void _) {
       scaffoldMessenger.showSnackBar(const SnackBar(
         backgroundColor: Colors.green,
         content: Text('Uma nova conversão foi adicionada ao histórico'),
       ));
+    }
 
-      final historyCurrency = HistoryCurrencyEntity(
-        user: user,
-        fromConversionType: convertCurrencyPageController.fromCurrency!.name,
-        toConversionType: convertCurrencyPageController.toCurrency!.name,
-        fromValue: fromTextEditingController.text,
-        toValue: toTextEditingController.text,
-      );
-
-      widget.historyCurrencyRepository.save(historyCurrency);
-    }).catchError((_) {
+    void onConversionError(void _) {
       scaffoldMessenger.showSnackBar(const SnackBar(
         content: Text(
           'Houve um erro ao relizar a conversão, verifique os campos e tente novamente',
         ),
       ));
-    });
+    }
+
+    convertCurrencyPageController
+        .convertCurrencyAndSaveInHistory(user)
+        .then(onConversionSuccess)
+        .catchError(onConversionError);
   }
 
   void _onBackButtonPress(BuildContext context) => Navigator.pop(context);
