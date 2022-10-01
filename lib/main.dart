@@ -1,7 +1,7 @@
 import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
-import 'package:atv_flutter_03/application/repositories/memory_history_currency_repository.dart';
-import 'package:atv_flutter_03/application/repositories/memory_user_repository.dart';
+import 'package:atv_flutter_03/infra/repositories/memory_history_currency_repository.dart';
+import 'package:atv_flutter_03/infra/repositories/memory_user_repository.dart';
 import 'package:atv_flutter_03/ui/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
