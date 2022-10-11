@@ -5,7 +5,9 @@ class MemoryHistoryCurrencyRepository extends HistoryCurrencyRepository {
   final List<HistoryCurrencyEntity> _currencies = [];
 
   @override
-  Future<List<HistoryCurrencyEntity>> getAll() async => _currencies;
+  Future<List<HistoryCurrencyEntity>> getAll() async {
+    return _currencies.reversed.toList();
+  }
 
   @override
   Future<void> save(HistoryCurrencyEntity historyCurrency) async {
