@@ -2,13 +2,13 @@ import 'package:atv_flutter_03/application/contracts/history_currency_repository
 import 'package:atv_flutter_03/application/entities/history_currency_entity.dart';
 
 class MemoryHistoryCurrencyRepository extends HistoryCurrencyRepository {
-  final List<HistoryCurrencyEntity> currencies = [];
+  final List<HistoryCurrencyEntity> _currencies = [];
 
   @override
-  Future<List<HistoryCurrencyEntity>> getAll() async => currencies;
+  Future<List<HistoryCurrencyEntity>> getAll() async => _currencies;
 
   @override
   Future<void> save(HistoryCurrencyEntity historyCurrency) async {
-    currencies.add(historyCurrency);
+    _currencies.add(historyCurrency);
   }
 }
