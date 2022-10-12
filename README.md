@@ -11,5 +11,9 @@ Aplicativo de conversão de moedas (real, dolar, euro e bitcoin), feito usando c
   <img src="./.github/currencies-history-page.png" width="200" height="400" />
 </div>
 
+### Features adicionais (11/10/2022):
+
+- Registra o usuário logado usando a dependência shared_preferences, e preenche o formulário de login ao acessar o app novamente.
+
 ----------
 By [Victor B. Fiamoncini](https://github.com/Victor-Fiamoncini) ☕️
