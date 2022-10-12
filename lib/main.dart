@@ -1,5 +1,8 @@
+import 'package:atv_flutter_03/application/contracts/get_storage.dart';
 import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/set_storage.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
+import 'package:atv_flutter_03/infra/cache/shared_preferences_storage.dart';
 import 'package:atv_flutter_03/infra/repositories/memory_history_currency_repository.dart';
 import 'package:atv_flutter_03/infra/repositories/memory_user_repository.dart';
 import 'package:atv_flutter_03/ui/pages/register_page.dart';
@@ -10,9 +13,13 @@ void main() {
   final userRepository = MemoryUserRepository();
   final historyCurrencyRepository = MemoryHistoryCurrencyRepository();
 
+  final sharedPreferencesGetAndSetStorage = SharedPreferencesStorage();
+
   final app = App(
     userRepository: userRepository,
     historyCurrencyRepository: historyCurrencyRepository,
+    getStorage: sharedPreferencesGetAndSetStorage,
+    setStorage: sharedPreferencesGetAndSetStorage,
   );
 
   runApp(app);
@@ -21,11 +28,15 @@ void main() {
 class App extends StatelessWidget {
   final UserRepository userRepository;
   final HistoryCurrencyRepository historyCurrencyRepository;
+  final GetStorage getStorage;
+  final SetStorage setStorage;
 
   const App({
     Key? key,
     required this.userRepository,
     required this.historyCurrencyRepository,
+    required this.getStorage,
+    required this.setStorage,
   }) : super(key: key);
 
   @override
@@ -108,6 +119,8 @@ class App extends StatelessWidget {
       home: RegisterPage(
         userRepository: userRepository,
         historyCurrencyRepository: historyCurrencyRepository,
+        getStorage: getStorage,
+        setStorage: setStorage,
       ),
     );
   }

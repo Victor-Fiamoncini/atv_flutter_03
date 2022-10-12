@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:atv_flutter_03/application/contracts/get_storage.dart';
 import 'package:atv_flutter_03/application/contracts/history_currency_repository.dart';
+import 'package:atv_flutter_03/application/contracts/set_storage.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/presentation/controllers/register_page_controller.dart';
+import 'package:atv_flutter_03/ui/constants.dart';
 import 'package:atv_flutter_03/ui/pages/convert_currency_page.dart';
 import 'package:atv_flutter_03/ui/styles.dart';
 import 'package:atv_flutter_03/validators/register_validator.dart';
@@ -9,11 +14,15 @@ import 'package:flutter/material.dart';
 class RegisterPage extends StatefulWidget {
   final UserRepository userRepository;
   final HistoryCurrencyRepository historyCurrencyRepository;
+  final GetStorage getStorage;
+  final SetStorage setStorage;
 
   const RegisterPage({
     Key? key,
     required this.userRepository,
     required this.historyCurrencyRepository,
+    required this.getStorage,
+    required this.setStorage,
   }) : super(key: key);
 
   @override
@@ -32,10 +41,18 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
 
+    widget.getStorage.getValue(registeredUserStorageKey).then((value) {
+      final storagedUser = jsonDecode(value);
+
+      nameEditingController.text = storagedUser?['name'] ?? '';
+      emailEditingController.text = storagedUser?['email'] ?? '';
+    });
+
     registerPageController = RegisterPageController(
       nameEditingController: nameEditingController,
       emailEditingController: emailEditingController,
       userRepository: widget.userRepository,
+      setStorage: widget.setStorage,
     );
   }
 

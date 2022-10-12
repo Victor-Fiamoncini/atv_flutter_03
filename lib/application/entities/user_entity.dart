@@ -4,5 +4,5 @@ class UserEntity {
 
   const UserEntity({required this.name, required this.email});
 
-  Map toJson() => {'name': name, 'email': email};
+  Map toMap() => {'name': name, 'email': email};
 }
