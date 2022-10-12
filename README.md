@@ -13,7 +13,8 @@ Aplicativo de conversão de moedas (real, dolar, euro e bitcoin), feito usando c
 
 ### Features adicionais (11/10/2022):
 
-- Registra o usuário logado usando a dependência shared_preferences, e preenche o formulário de login ao acessar o app novamente.
+- Registra o usuário logado usando a dependência shared_preferences, convertendo a classe UserEntity para um HashMap e depois para uma string JSON.
+- Preenche o formulário de login ao acessar o app novamente com o usuário armazenado nas shared_preferences.
 
 ----------
 By [Victor B. Fiamoncini](https://github.com/Victor-Fiamoncini) ☕️
