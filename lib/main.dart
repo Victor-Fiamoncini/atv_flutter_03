@@ -3,16 +3,15 @@ import 'package:atv_flutter_03/application/contracts/history_currency_repository
 import 'package:atv_flutter_03/application/contracts/set_storage.dart';
 import 'package:atv_flutter_03/application/contracts/user_repository.dart';
 import 'package:atv_flutter_03/infra/cache/shared_preferences_storage.dart';
-import 'package:atv_flutter_03/infra/repositories/memory_history_currency_repository.dart';
 import 'package:atv_flutter_03/infra/repositories/memory_user_repository.dart';
+import 'package:atv_flutter_03/infra/repositories/sqlite_history_currency_repository.dart';
 import 'package:atv_flutter_03/ui/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
   final userRepository = MemoryUserRepository();
-  final historyCurrencyRepository = MemoryHistoryCurrencyRepository();
-
+  final historyCurrencyRepository = SqliteHistoryCurrencyRepository();
   final sharedPreferencesGetAndSetStorage = SharedPreferencesStorage();
 
   final app = App(
