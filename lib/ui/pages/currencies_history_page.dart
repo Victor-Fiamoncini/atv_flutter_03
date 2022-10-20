@@ -16,7 +16,7 @@ class CurrenciesHistoryPage extends StatefulWidget {
 }
 
 class _CurrenciesHistoryPageState extends State<CurrenciesHistoryPage> {
-  late List<HistoryCurrencyEntity> currencies;
+  List<HistoryCurrencyEntity> currencies = [];
 
   @override
   void initState() {
