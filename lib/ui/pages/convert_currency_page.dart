@@ -21,11 +21,12 @@ class ConvertCurrencyPage extends StatefulWidget {
 }
 
 class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
-  late UserEntity user;
   late ConvertCurrencyPageController convertCurrencyPageController;
 
   final fromTextEditingController = TextEditingController();
   final toTextEditingController = TextEditingController();
+
+  UserEntity? user;
 
   @override
   void initState() {
@@ -61,7 +62,7 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
     }
 
     convertCurrencyPageController
-        .convertCurrencyAndSaveInHistory(user)
+        .convertCurrencyAndSaveInHistory(user as UserEntity)
         .then(onConversionSuccess)
         .catchError(onConversionError);
   }
@@ -89,7 +90,7 @@ class _ConvertCurrencyPageState extends State<ConvertCurrencyPage> {
         backgroundColor: theme.colorScheme.primary,
         elevation: 0,
         title: Text(
-          'Olá ${user.name}',
+          'Olá ${user?.name}',
           style: TextStyle(
             color: theme.colorScheme.secondary,
             overflow: TextOverflow.ellipsis,
