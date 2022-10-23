@@ -1,6 +1,6 @@
 String onCreate() => '''
   CREATE TABLE IF NOT EXISTS currency_history (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
     email TEXT NOT NULL,
     from_currency TEXT NOT NULL,

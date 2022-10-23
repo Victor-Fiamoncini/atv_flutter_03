@@ -9,7 +9,8 @@ class SqliteHistoryCurrencyRepository extends HistoryCurrencyRepository {
   Future<List<HistoryCurrencyEntity>> getAll() async {
     final database = await SqliteHelper().database;
 
-    final historyCurrencies = await database.query('currency_history');
+    const sql = 'SELECT * FROM currency_history ORDER BY id DESC';
+    final historyCurrencies = await database.rawQuery(sql);
 
     return historyCurrencies
         .map(
