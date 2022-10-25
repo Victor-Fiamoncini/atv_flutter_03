@@ -27,6 +27,16 @@ class _CurrenciesHistoryPageState extends State<CurrenciesHistoryPage> {
     });
   }
 
+  Future<void> _onDeleteButtonPress(int? id) async {
+    if (id == null) return;
+
+    await widget.historyCurrencyRepository.deleteById(id);
+
+    final currenciesList = await widget.historyCurrencyRepository.getAll();
+
+    setState(() => currencies = currenciesList);
+  }
+
   void _onBackButtonPress(BuildContext context) => Navigator.pop(context);
 
   @override
@@ -57,6 +67,7 @@ class _CurrenciesHistoryPageState extends State<CurrenciesHistoryPage> {
           itemCount: currencies.length,
           itemBuilder: (context, index) => HistoryCurrencyListItem(
             historyCurrency: currencies[index],
+            onDeleteButtonPress: _onDeleteButtonPress,
           ),
         ),
       ),
