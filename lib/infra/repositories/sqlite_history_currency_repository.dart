@@ -16,6 +16,7 @@ class SqliteHistoryCurrencyRepository extends HistoryCurrencyRepository {
         .map(
           (historyCurrencyRow) => HistoryCurrencyEntity(
             user: UserEntity(
+              id: historyCurrencyRow['id'] as int,
               name: historyCurrencyRow['username'].toString(),
               email: historyCurrencyRow['email'].toString(),
             ),
@@ -46,5 +47,13 @@ class SqliteHistoryCurrencyRepository extends HistoryCurrencyRepository {
     };
 
     await database.insert('currency_history', mappedHistoryCurrency);
+  }
+
+  @override
+  Future<void> deleteById(int id) async {
+    final database = await SqliteHelper().database;
+
+    const sql = 'DELETE FROM currency_history WHERE id = ?';
+    await database.rawDelete(sql, [id]);
   }
 }

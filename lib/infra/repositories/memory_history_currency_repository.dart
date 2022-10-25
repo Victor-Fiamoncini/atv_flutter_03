@@ -13,4 +13,9 @@ class MemoryHistoryCurrencyRepository extends HistoryCurrencyRepository {
   Future<void> save(HistoryCurrencyEntity historyCurrency) async {
     _currencies.add(historyCurrency);
   }
+
+  @override
+  Future<void> deleteById(int id) {
+    throw UnimplementedError();
+  }
 }

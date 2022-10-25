@@ -4,4 +4,6 @@ abstract class HistoryCurrencyRepository {
   Future<void> save(HistoryCurrencyEntity historyCurrency);
 
   Future<List<HistoryCurrencyEntity>> getAll();
+
+  Future<void> deleteById(int id);
 }
