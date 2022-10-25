@@ -19,7 +19,8 @@ Aplicativo de conversão de moedas (real, dolar, euro e bitcoin), feito usando c
 ### Features adicionais (18/10/2022)
 
 - Registra cada conversão feita no histórico de conversões utilizando SQLite;
-- Exibe os dados vindos do SQLite na lista do histórico de conversões.
+- Exibe os dados vindos do SQLite na lista do histórico de conversões;
+- Adiciona opção de deletar cada registro do histórico de conversões.
 
 ----------
 By [Victor B. Fiamoncini](https://github.com/Victor-Fiamoncini) ☕️
