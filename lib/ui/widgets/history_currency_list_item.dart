@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 
 class HistoryCurrencyListItem extends StatelessWidget {
   final HistoryCurrencyEntity historyCurrency;
+  final Function(int?) onDeleteButtonPress;
 
-  const HistoryCurrencyListItem({super.key, required this.historyCurrency});
+  const HistoryCurrencyListItem({
+    super.key,
+    required this.historyCurrency,
+    required this.onDeleteButtonPress,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    final id = historyCurrency.user.id;
     final fromConversionType =
         historyCurrency.fromConversionType.name.toUpperCase();
     final toConversionType =
@@ -56,6 +62,11 @@ class HistoryCurrencyListItem extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete),
+          color: theme.colorScheme.secondary,
+          onPressed: () => onDeleteButtonPress(id),
         ),
       ),
     );
