@@ -43,22 +43,42 @@ class _CurrenciesHistoryPageState extends State<CurrenciesHistoryPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.colorScheme.primary,
-        elevation: 0,
-        title: Text(
-          'Histórico de Conversões',
-          style: TextStyle(
-            color: theme.colorScheme.secondary,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        leading: BackButton(
+    final appBar = AppBar(
+      backgroundColor: theme.colorScheme.primary,
+      elevation: 0,
+      title: Text(
+        'Histórico de Conversões',
+        style: TextStyle(
           color: theme.colorScheme.secondary,
-          onPressed: () => _onBackButtonPress(context),
+          overflow: TextOverflow.ellipsis,
         ),
       ),
+      leading: BackButton(
+        color: theme.colorScheme.secondary,
+        onPressed: () => _onBackButtonPress(context),
+      ),
+    );
+
+    if (currencies.isEmpty) {
+      return Scaffold(
+        appBar: appBar,
+        body: const SizedBox(
+          width: double.infinity,
+          child: Center(
+            child: Text(
+              'Nenhuma conversão feita',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: appBar,
       body: SizedBox(
         width: double.infinity,
         child: ListView.builder(
